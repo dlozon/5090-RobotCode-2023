@@ -8,14 +8,11 @@ import edu.wpi.first.wpilibj.Joystick;
 
 // Camera imports
 import edu.wpi.first.cameraserver.CameraServer;
-
-// Subsystem imports
-import frc.robot.subsystems.Drivetrain;
-
 // Misc imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.misc_subclasses.Dashboard;
 import frc.robot.misc_subclasses.Limelight;
+import frc.robot.subsystems.drivetrain.Drivetrain;
 
 
 
