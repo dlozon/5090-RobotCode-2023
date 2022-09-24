@@ -26,4 +26,13 @@ public final class Constants {
     public static final double DRIVE_K = 0.36;             // How fast to drive toward the target
     public static final double STEER_K = 0.05;             // How quickly the robot turns toward the target
     public static final double MAX_DRIVE = 0.5;            // Simple speed limit so we don't drive too fast
+
+    // Swerve Motor PID values
+    public static final double DRIVING_MOTOR_P = .25;
+    public static final double DRIVING_MOTOR_I = -1;
+    public static final double DRIVING_MOTOR_D = -1;
+
+    public static final double TURNING_MOTOR_P = .25;
+    public static final double TURNING_MOTOR_I = -1;
+    public static final double TURNING_MOTOR_D = -1;
 }
