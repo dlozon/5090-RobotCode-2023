@@ -2,6 +2,7 @@ package frc.robot.wrappers;
 
 // Imports
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 public class GenericPID {
@@ -16,8 +17,8 @@ public class GenericPID {
     private double min = Integer.MIN_VALUE;
     private double max = Integer.MAX_VALUE;
 
-    // Constructor with only P
-    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P) {
+    // Constructor with P, I, and D
+    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P, double I, double D) {
         this.motor = motor;
         controller = motor.getPIDController();
 
@@ -25,11 +26,16 @@ public class GenericPID {
 
         this.P = P;
         controller.setP(P);
+
+        this.I = I;
+        controller.setI(I);
+
+        this.D = D;
+        controller.setD(D);
     }
 
-    // Constructor with P, I, and D
-    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P, double I, double D) {
-        this.motor = motor;
+    public GenericPID(int motorID, CANSparkMax.ControlType controlType, double P, double I, double D) {
+        this.motor = new CANSparkMax(motorID, MotorType.kBrushless);
         controller = motor.getPIDController();
 
         this.controlType = controlType;
