@@ -8,11 +8,17 @@ import edu.wpi.first.wpilibj.Joystick;
 
 // Camera imports
 import edu.wpi.first.cameraserver.CameraServer;
+
 // Misc imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.misc_subclasses.Dashboard;
 import frc.robot.misc_subclasses.Limelight;
 import frc.robot.subsystems.drivetrain.Drivetrain;
+
+// Constant value imports
+import static frc.robot.lists.Constants.*;
+import static frc.robot.lists.ID_Numbers.*;
+import static frc.robot.lists.PID_Values.*;
 
 
 
@@ -38,8 +44,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize variables
-    joystick = new Joystick(0);
-    xbox  = new XboxController(1);
+    joystick = new Joystick(JOYSTICK_PORT);
+    xbox  = new XboxController(CONTROLLER_PORT);
 
     CameraServer.startAutomaticCapture();
     limelight = new Limelight();
