@@ -16,9 +16,7 @@ import frc.robot.misc_subclasses.Limelight;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 // Constant value imports
-import static frc.robot.lists.Constants.*;
 import static frc.robot.lists.ID_Numbers.*;
-import static frc.robot.lists.PID_Values.*;
 
 
 
@@ -47,6 +45,8 @@ public class Robot extends TimedRobot {
     joystick = new Joystick(JOYSTICK_PORT);
     xbox  = new XboxController(CONTROLLER_PORT);
 
+    drivetrain = new Drivetrain();
+
     CameraServer.startAutomaticCapture();
     limelight = new Limelight();
 
@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
   // This function is called every 20ms during teleop
   @Override
   public void teleopPeriodic() {
-   
+    drivetrain.drive(xbox.getLeftX(), xbox.getLeftY(), -xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis());
   }
 
   // This function is called every 20ms while the robot is enabled

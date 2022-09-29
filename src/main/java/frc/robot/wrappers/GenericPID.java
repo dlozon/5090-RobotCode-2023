@@ -2,7 +2,6 @@ package frc.robot.wrappers;
 
 // Imports
 import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 public class GenericPID {
