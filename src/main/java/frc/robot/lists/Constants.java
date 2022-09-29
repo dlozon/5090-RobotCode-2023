@@ -28,12 +28,12 @@ public final class Constants {
     // Positions of all the swerve modules in mm where bottom left module is 0,0
     public static final int[][] SWERVE_POSITIONS = {
         {0,0},
-        {0,1000},
-        {1000,0},
-        {1000,1000}
+        {0,24.75},
+        {24.75,0},
+        {24.75,24.75}
     };
 
     // Position of the rotational center of the robot
-    public static final int centerX = 500;
-    public static final int centerY = 500;
+    public static final int centerX = 12.375;
+    public static final int centerY = 12.375;
 }
