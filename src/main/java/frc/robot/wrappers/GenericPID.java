@@ -17,8 +17,8 @@ public class GenericPID {
     private double min = Integer.MIN_VALUE;
     private double max = Integer.MAX_VALUE;
 
-    // Constructor with P, I, and D
-    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P, double I, double D) {
+    // Constructor with only P
+    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P) {
         this.motor = motor;
         controller = motor.getPIDController();
 
@@ -26,16 +26,11 @@ public class GenericPID {
 
         this.P = P;
         controller.setP(P);
-
-        this.I = I;
-        controller.setI(I);
-
-        this.D = D;
-        controller.setD(D);
     }
 
-    public GenericPID(int motorID, CANSparkMax.ControlType controlType, double P, double I, double D) {
-        this.motor = new CANSparkMax(motorID, MotorType.kBrushless);
+    // Constructor with P, I, and D
+    public GenericPID(CANSparkMax motor, CANSparkMax.ControlType controlType, double P, double I, double D) {
+        this.motor = motor;
         controller = motor.getPIDController();
 
         this.controlType = controlType;
