@@ -14,5 +14,11 @@ public final class ID_Numbers {
     // Digital input ports
 
     // Motor IDs
-    
+    // Array of motor IDs for swerve 3x for turning and 4x for driving
+    public static final int[][] SWERVE_MOTOR_IDS = {
+        {30,40},
+        {31,41},
+        {32,42},
+        {33,43}
+    };
 }

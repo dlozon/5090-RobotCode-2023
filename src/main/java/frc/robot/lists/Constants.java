@@ -24,4 +24,16 @@ public final class Constants {
     // Swerve ratios
     public static final double DRIVING_MOTOR_RATIO = 1;
     public static final double TURNING_MOTOR_RATIO = 1;
+
+    // Positions of all the swerve modules in mm where bottom left module is 0,0
+    public static final int[][] SWERVE_POSITIONS = {
+        {0,0},
+        {0,1000},
+        {1000,0},
+        {1000,1000}
+    };
+
+    // Position of the rotational center of the robot
+    public static final int centerX = 500;
+    public static final int centerY = 500;
 }
