@@ -96,6 +96,10 @@ public class Drivetrain {
     }
     // Computes and sends overall instructions for each of the swerve modules
     private void calculateDrive(double X, double Y, double rotation) {
+        // [n][0] is direction and [n][1] is magnitude
+        double[][] netVectors = new double[SWERVE_MOTOR_IDS.length][2];
+        double largestMagnitude = 0;
+
         for (int i = 0; i < SWERVE_MOTOR_IDS.length; i++ ) {
             // Convert the rotation vector to cartesian coordinates
             double rotationOffset = Math.signum(rotation) * 90;
@@ -109,22 +113,32 @@ public class Drivetrain {
             double netY = Y + rotationY;
 
             // Convert the cordinate into a vector
-            double netMagnitude = linearDistance(netX, netY) * distScalers[i];
-            double netDirection = 90 - Math.toDegrees(Math.atan2(netX, netY));
-            double oppositeDirection = (netDirection + 180) % 360;
+            netVectors[i][0] = 90 - Math.toDegrees(Math.atan2(netX, netY));
+            netVectors[i][1] = linearDistance(netX, netY) * distScalers[i];
+
+            // Save the largest magnitude
+            if(Math.abs(netVectors[i][0]) > largestMagnitude)
+                largestMagnitude = netVectors[i][0];
+        }
+
+        for (int i = 0; i < SWERVE_MOTOR_IDS.length; i++ ) {
+            // Normalize the magnitude
+            if(largestMagnitude > 1)
+                netVectors[i][1] /= largestMagnitude;
 
             // Pick the most efficient way to turn the wheel
-            double opt1 = angularDistance(turningMotors[i].getCurrDir(), netDirection);
+            double oppositeDirection = (netVectors[i][0] + 180) % 360;
+            double opt1 = angularDistance(turningMotors[i].getCurrDir(), netVectors[i][0]);
             double opt2 = angularDistance(turningMotors[i].getCurrDir(), oppositeDirection);
 
             // Decide which of the two options to use
             if(opt1 <= opt2) { // Choose opt1
                 turningMotors[i].turn(opt1);
-                drivingMotors[i].forwards(netMagnitude);
+                drivingMotors[i].forwards(netVectors[i][1]);
             }
             else { // Choose opt2
                 turningMotors[i].turn(opt2);
-                drivingMotors[i].backwards(netMagnitude);
+                drivingMotors[i].forwards(-netVectors[i][1]);
             }
         }
     }
