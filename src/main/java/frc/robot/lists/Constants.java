@@ -26,7 +26,7 @@ public final class Constants {
     public static final double TURNING_MOTOR_RATIO = 5/84;
 
     // Positions of all the swerve modules in mm where bottom left module is 0,0
-    public static final int[][] SWERVE_POSITIONS = {
+    public static final double[][] SWERVE_POSITIONS = {
         {0,0},
         {0,24.75},
         {24.75,0},
@@ -34,6 +34,6 @@ public final class Constants {
     };
 
     // Position of the rotational center of the robot
-    public static final int centerX = 12.375;
-    public static final int centerY = 12.375;
+    public static final double centerX = 12.375;
+    public static final double centerY = 12.375;
 }
