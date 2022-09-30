@@ -22,16 +22,20 @@ public class TurningMotor {
                              TURNING_MOTOR_P, TURNING_MOTOR_I, TURNING_MOTOR_D);
     }
  
+    // Getters
     // Returns the current direction of the motor in degrees [0,360]
-    public double getCurrDir() {
-        return pid.getPosition() / TURNING_MOTOR_RATIO;
-    }
+    public double getCurrDir() { return (pid.getPosition() / TURNING_MOTOR_RATIO) % 360; }
+    public GenericPID getPID() { return pid; }
+    public CANSparkMax getMotor() { return motor; }
+
+    // Stopping methods
+    public void pause() { pid.pause(); }
+    public void stop() { pid.stop(); }
 
     // Turns the motor by n degrees
     public void turn(double degrees) {
         pid.activate(getCurrDir() + (degrees * TURNING_MOTOR_RATIO));
     }
-
     // Turns the motor to n degrees
     public void turnTo(double degrees) {
         pid.activate(degrees * TURNING_MOTOR_RATIO);

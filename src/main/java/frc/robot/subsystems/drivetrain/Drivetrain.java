@@ -4,6 +4,10 @@ import static frc.robot.lists.ID_Numbers.SWERVE_MOTOR_IDS;
 import static frc.robot.lists.Constants.*;
 import java.util.*;
 
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.CAN;
+
 public class Drivetrain {
     private TurningMotor[] turningMotors = new TurningMotor[SWERVE_MOTOR_IDS.length];
     private DrivingMotor[] drivingMotors = new DrivingMotor[SWERVE_MOTOR_IDS.length];
@@ -45,6 +49,18 @@ public class Drivetrain {
         }
     }
 
+    // Getters
+    public TurningMotor getTurningMotor(int index) { return turningMotors[index]; }
+    public DrivingMotor getDrivingMotor(int index) { return drivingMotors[index]; }
+
+    // Stop all motors
+    public void stop() {
+        for (int i = 0; i < SWERVE_MOTOR_IDS.length; i++ ) {
+            turningMotors[i].stop();
+            drivingMotors[i].stop();
+        }
+    }
+
     // Converts the X and Y into a degree angle and checks 
     // if the inputs have changed since the last call
     public void drive(double X, double Y, double rotation) {
@@ -69,8 +85,6 @@ public class Drivetrain {
                 calculateDrive(X, Y, rotation);
         }
     }
-
-
 
     // Computes and sends translation instructions for each of the swerve modules
     private void calculateDrive(double X, double Y) {
