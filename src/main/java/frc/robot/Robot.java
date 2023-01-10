@@ -45,6 +45,8 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
 
     dashboard = new Dashboard();
+
+    drivetrain = new Drivetrain();
   }
 
   // This function is called once at the start of auton
@@ -68,17 +70,20 @@ public class Robot extends TimedRobot {
   // This function is called every 20ms during teleop
   @Override
   public void teleopPeriodic() {
-   
+    drivetrain.drive(xbox.getLeftY()/3);
+    
+    if(xbox.getLeftTriggerAxis() > .05)
+      drivetrain.spin(-xbox.getLeftTriggerAxis()/3);
+    else if(xbox.getRightTriggerAxis() > .05)
+      drivetrain.spin(xbox.getLeftTriggerAxis()/3);
+
+    if(xbox.getBButton())
+      drivetrain.stop();
   }
 
   // This function is called every 20ms while the robot is enabled
   @Override
   public void robotPeriodic() {
 
-    // Update subclass internal values
-    limelight.updateLimelightTracking();
-
-    // Update dashboard
-    dashboard.printLimelightData(limelight);
   }
 }
